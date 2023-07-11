@@ -10,12 +10,12 @@
         max-width: 800px;
         min-width: 480px;
         margin: 0 auto;
+        font-size: x-large;
       }
 
-      .form input{
+      .form input {
         width: 200px;
       }
-      
     </style>
   </head>
   <body>
@@ -24,10 +24,16 @@
     <p>1~100 randomize</p>
 
     <form class="form">
-      <label for="guessField">추측 숫자</label>
+      <label for="guessField">추측 숫자를 입력하세요.</label>
 
-      <input type="text" id="guessField" />
-      <input type="submit" value="submit" />
+      <input
+        type="number"
+        min="1"
+        max="100"
+        id="guessField"
+        class="guessField"
+      />
+      <input type="submit" value="submit" class="guessSubmit" />
     </form>
 
     <div class="resultParas">
@@ -35,5 +41,37 @@
       <p class="lastResult"></p>
       <p class="lowOrHi"></p>
     </div>
+    <script>
+      let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+      let guesses = document.querySelector(".guesses");
+      let lastResult = document.querySelector(".lastResult");
+      let lowOrHi = document.querySelector(".lowOrHi");
+      let guessSubmit = document.querySelector(".guessSubmit");
+      let guessField = document.querySelector("#guessField");
+
+      let guessCount = 1;
+      let resetButton;
+
+      //올바른 번호인지 확인
+      function checkGuess(event) {
+        event.preventDefault();
+        let userGuess = Number(guessField.value);
+
+        if (randomNumber === userGuess) {
+          lastResult.textContent = "축하합니다~~~~~";
+          setGameOver();
+          guessField.disabled = true;
+          guessSubmit.disabled = true;
+          resetButton = document.createElement("button");
+          resetButton.textContent = "새 게임하기";
+          document.body.appendChild(resetButton);
+        } else if ("abc") {
+        } else {
+        }
+      }
+
+      guessSubmit.addEventListener("click", checkGuess);
+    </script>
   </body>
 </html>
